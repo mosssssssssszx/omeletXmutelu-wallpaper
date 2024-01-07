@@ -221,19 +221,19 @@
       <div class="tab">
         <button
           class="tablinks"
-          onclick="openCity(event, 'hinduGod'),currentSlidehindu(1)"
+          onclick="openGodTab(event, 'hinduGod'),currentSlidehindu(1)"
         >
           เทพฮินดู
         </button>
         <button
           class="tablinks"
-          onclick="openCity(event, 'chineseGod'),currentSlidechinese(1)"
+          onclick="openGodTab(event, 'chineseGod'),currentSlidechinese(1)"
         >
           เทพจีน
         </button>
         <button
           class="tablinks"
-          onclick="openCity(event, 'BuddhaGod'),currentSlideBuddha(1)"
+          onclick="openGodTab(event, 'BuddhaGod'),currentSlideBuddha(1)"
         >
           สายพุธ
         </button>
@@ -533,7 +533,7 @@
     <p id="currentGodValue"></p>
     
     <script>
-      function openCity(evt, God) {
+      function openGodTab(evt, God) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
@@ -765,10 +765,9 @@
     <script>
       window.onload = function () {
         initializeLiff();
-
-        openCity(event, "hinduGod");
+        document.getElementsByClassName("tablinks")[0].classList.replace(" active", "")
+        openGodTab(event, "hinduGod");
         currentSlidehindu(1);
-        document.getElementsByClassName("tablinks")[0].classList.add("active");
       };
 
       async function initializeLiff() {
