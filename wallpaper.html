@@ -217,6 +217,10 @@
     </style>
   </head>
   <body>
+    <div id="loadingMessage">
+      <!-- Loading message or spinner -->
+      <p>Loading...</p>
+    </div>
     <div class="tabContainer">
       <div class="tab">
         <button
@@ -533,6 +537,39 @@
     <p id="currentGodValue"></p>
 
     <script>
+      window.onload = function () {
+        initializeLiff();
+        document.getElementsByClassName("tablinks")[0].classList.add("active");
+      };
+
+      async function initializeLiff() {
+        try {
+          document.getElementById('loadingMessage').style.display = 'block';
+          await liff.init({ liffId: "2002626947-bwZNRxPo" }); // Replace 'YOUR_LIFF_ID' with your actual LIFF ID
+          if (liff.isLoggedIn()) {
+            const profile = await liff.getProfile();
+            const userId = profile.userId;
+            const displayName = profile.displayName;
+            document.getElementById("userId").innerText = userId; // Display the user ID in an element with the 'userId' id
+            document.getElementById("displayName").innerText = displayName;
+            document.getElementsByClassName("tablinks")[0].classList.add("active");
+          } else {
+            liff.login();
+            // If the user is not logged in, prompt them to log in    
+          }
+          
+        } catch (error) {
+          console.error("LIFF initialization failed", error);
+        }finally {
+        // Hide loading message when initialization completes (success or failure)
+        document.getElementById('loadingMessage').style.display = 'none';
+        document.getElementById('hinduGodTab').click();
+        currentSlidehindu(1);
+        document.getElementsByClassName("tablinks")[0].classList.add("active");
+      }
+      }
+    </script>
+    <script>
       function openGodTab(evt, God) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -762,35 +799,6 @@
           });
       }
     </script>
-    <script>
-      window.onload = function () {;
-        initializeLiff();
-        document.getElementById('hinduGodTab').click();
-        openGodTab(event, "hinduGod");
-      };
 
-      async function initializeLiff() {
-        try {
-          await liff.init({ liffId: "2002626947-bwZNRxPo" }); // Replace 'YOUR_LIFF_ID' with your actual LIFF ID
-          if (liff.isLoggedIn()) {
-            const profile = await liff.getProfile();
-            const userId = profile.userId;
-            const displayName = profile.displayName;
-            document.getElementById("userId").innerText = userId; // Display the user ID in an element with the 'userId' id
-            document.getElementById("displayName").innerText = displayName;
-            document.getElementById('hinduGodTab').click();
-            openGodTab(event, "hinduGod");
-            currentSlidehindu(1);
-          } else {
-            liff.login();
-            // If the user is not logged in, prompt them to log in
-            
-          }
-          
-        } catch (error) {
-          console.error("LIFF initialization failed", error);
-        }
-      }
-    </script>
   </body>
 </html>
