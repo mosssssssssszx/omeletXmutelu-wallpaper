@@ -525,6 +525,7 @@
             สร้างวอร์เปเปอร์
           </button>
         </div>
+        <div>Userdisplayname: <span id="displayName"></span></div>
         <div>User ID: <span id="userId"></span></div>
       </form>
       
@@ -776,7 +777,9 @@
           if (liff.isLoggedIn()) {
             const profile = await liff.getProfile();
             const userId = profile.userId;
+            const displayName = profile.displayName;
             document.getElementById("userId").innerText = userId; // Display the user ID in an element with the 'userId' id
+            document.getElementById('displayName').innerText = displayName;
           } else {
             liff.login(); // If the user is not logged in, prompt them to log in
           }
