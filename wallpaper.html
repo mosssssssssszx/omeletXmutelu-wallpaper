@@ -765,12 +765,12 @@
     <script>
       window.onload = function () {
         initializeLiff();
-        document.getElementsByClassName("tablinks")[0].classList.replace(" active", "")
-        openGodTab(event, "hinduGod");
-        currentSlidehindu(1);
       };
 
       async function initializeLiff() {
+        document.getElementsByClassName("tablinks")[0].classList.replace(" active", "")
+        openGodTab(event, "hinduGod");
+        currentSlidehindu(1);
         try {
           await liff.init({ liffId: "2002626947-bwZNRxPo" }); // Replace 'YOUR_LIFF_ID' with your actual LIFF ID
           if (liff.isLoggedIn()) {
