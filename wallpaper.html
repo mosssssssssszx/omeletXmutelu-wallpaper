@@ -766,6 +766,7 @@
       window.onload = function () {;
         initializeLiff();
         document.getElementById('hinduGodTab').click();
+        openGodTab(event, "hinduGod");
       };
 
       async function initializeLiff() {
@@ -778,6 +779,7 @@
             document.getElementById("userId").innerText = userId; // Display the user ID in an element with the 'userId' id
             document.getElementById("displayName").innerText = displayName;
             document.getElementById('hinduGodTab').click();
+            openGodTab(event, "hinduGod");
             currentSlidehindu(1);
           } else {
             liff.login();
