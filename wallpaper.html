@@ -222,6 +222,7 @@
         <button
           class="tablinks"
           onclick="openGodTab(event, 'hinduGod'),currentSlidehindu(1)"
+          id="hinduGodTab"
         >
           เทพฮินดู
         </button>
@@ -764,6 +765,7 @@
     <script>
       window.onload = function () {;
         initializeLiff();
+        document.getElementById('hinduGodTab').click();
       };
 
       async function initializeLiff() {
@@ -775,9 +777,7 @@
             const displayName = profile.displayName;
             document.getElementById("userId").innerText = userId; // Display the user ID in an element with the 'userId' id
             document.getElementById("displayName").innerText = displayName;
-            var firstTab = document.getElementsByClassName("tablinks")[0];
-            firstTab.click();
-            openGodTab(event, "hinduGod");
+            document.getElementById('hinduGodTab').click();
             currentSlidehindu(1);
           } else {
             liff.login();
