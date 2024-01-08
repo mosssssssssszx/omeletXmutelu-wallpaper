@@ -225,7 +225,7 @@
         justify-content: center;
         align-items: center;
       }
-      .loader{
+      .loader {
         position: fixed;
         top: 0;
         left: 0;
@@ -669,6 +669,33 @@
         slides[slideIndexhindu - 1].style.display = "block";
         dots[slideIndexhindu - 1].className += " active";
       }
+    </script>
+    <script>
+      const form = document.getElementById("myForm");
+      const submitButton = document.querySelector('button[type="submit"]');
+      function isFormDataReady() {
+        const email = document.getElementById("email").value;
+        const birthDate = document.getElementById("birthDate").value;
+        const birthDay = document.getElementById("birthDay").value;
+        const interests = document.querySelector(
+          'input[name="interests"]:checked'
+        );
+
+        return email !== "" && birthDate !== "" && birthDay !== "" && interests;
+      }
+
+      function toggleButton() {
+        if (isFormDataReady()) {
+          submitButton.removeAttribute("disabled");
+        } else {
+          submitButton.setAttribute("disabled", "disabled");
+        }
+      }
+
+      form.addEventListener("input", toggleButton);
+      form.addEventListener("change", toggleButton);
+
+      toggleButton();
     </script>
 
     <script>
