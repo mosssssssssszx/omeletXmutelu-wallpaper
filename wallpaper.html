@@ -237,6 +237,36 @@
         align-items: center;
       }
     </style>
+    <style>
+      .date-input {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+
+      .date-input .placeholder {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #aaa;
+        transition: all 0.2s ease;
+        z-index: -1;
+      }
+
+      .date-input input[type="date"] {
+        z-index: 1;
+      }
+
+      .date-input input[type="date"]:not(:focus) + .placeholder {
+        opacity: 1;
+      }
+
+      .date-input input[type="date"]:focus + .placeholder {
+        opacity: 0;
+      }
+    </style>
   </head>
   <body>
     <div class="loadingMessage" id="loadingMessage">
@@ -486,6 +516,7 @@
               >ระบุวัน เดือน ปี เกิดของคุณ</label
             >
             <input type="date" class="form-control" id="birthDate" />
+            <span class="placeholder">Select Birthdate</span>
           </div>
 
           <div class="col-md-4 offset-md-4">
@@ -555,7 +586,6 @@
             สร้างวอร์เปเปอร์
           </button>
         </div>
-
       </form>
     </div>
     <div>Userdisplayname: <span id="displayName"></span></div>
@@ -865,8 +895,10 @@
           'input[name="interests"]:checked'
         ).value;
 
-        document.getElementById("finaloutput").innerHTML = `${currentGodValue}-${interests}-${sign}-${birthDay}`;
-        
+        document.getElementById(
+          "finaloutput"
+        ).innerHTML = `${currentGodValue}-${interests}-${sign}-${birthDay}`;
+
         fetch("https://your-api-endpoint", {
           method: "POST",
           headers: {
