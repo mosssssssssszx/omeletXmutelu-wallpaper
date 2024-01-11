@@ -571,7 +571,7 @@
           await liff.init({ liffId: "2002626947-bwZNRxPo" });
           if (liff.isLoggedIn()) {
             const profile = await liff.getProfile();
-            const userId = profile.userId;
+            var userId = profile.userId;
             document
               .getElementsByClassName("tablinks")[0]
               .classList.add("active");
