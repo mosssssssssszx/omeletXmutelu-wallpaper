@@ -876,27 +876,35 @@
             console.error(error);
           });
 
-        var dataToSend = {
-          currentGodValue: "someValue",
-          email: "example@example.com",
-          birthDate: "2022-01-11",
-          birthDay: "Monday",
-          interests: "Programming",
-        };
         function sendDataToGoogleAppsScript(data) {
           fetch(
             "https://script.google.com/macros/s/AKfycbxbKUSsmGpfSwc4lhVz_ZNf0OCOlWS5QzuFupdiFWudSvuNp7pgalAn6jJdAUCeJXEi2Q/exec",
             {
               method: "POST",
-              body: JSON.stringify(data), // Assuming 'data' is an object
+              body: JSON.stringify({
+                currentGodValue,
+                email,
+                birthDate,
+                birthDay,
+                interests,
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },
             }
           )
-            .then((response) => response.json())
-            .then((data) => {
-              console.log(data);
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((responseData) => {
+              // Adjust logging based on your script's response
+              console.log(responseData);
             })
             .catch((error) => {
-              console.error(error);
+              console.error("Error:", error);
             });
         }
       }
