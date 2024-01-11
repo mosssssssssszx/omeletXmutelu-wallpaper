@@ -589,6 +589,120 @@
             .classList.add("active");
         }
       }
+
+      function callAPI() {
+        event.preventDefault();
+        let currentGodValue = document.getElementById("godSelect").value;
+
+        const email = document.getElementById("email").value;
+        const birthDate = document.getElementById("birthDate").value;
+        const birthDay = document.getElementById("birthDay").value;
+
+        function checkZodiac() {
+          const birthDate = document.getElementById("birthDate").value;
+          var date = new Date(birthDate);
+          var month = date.getMonth() + 1; // Adding 1 since getMonth() returns zero-based index
+          var day = date.getDate();
+          var zodiacSign = "";
+
+          if ((month === 4 && day >= 15) || (month === 5 && day <= 14)) {
+            zodiacSign = "apr";
+          } else if ((month === 5 && day >= 15) || (month === 6 && day <= 14)) {
+            zodiacSign = "may";
+          } else if ((month === 6 && day >= 15) || (month === 7 && day <= 15)) {
+            zodiacSign = "jun";
+          } else if ((month === 7 && day >= 16) || (month === 8 && day <= 16)) {
+            zodiacSign = "jul";
+          } else if ((month === 8 && day >= 17) || (month === 9 && day <= 16)) {
+            zodiacSign = "aug";
+          } else if (
+            (month === 9 && day >= 17) ||
+            (month === 10 && day <= 16)
+          ) {
+            zodiacSign = "sep";
+          } else if (
+            (month === 10 && day >= 17) ||
+            (month === 11 && day <= 15)
+          ) {
+            zodiacSign = "oct";
+          } else if (
+            (month === 11 && day >= 16) ||
+            (month === 12 && day <= 14)
+          ) {
+            zodiacSign = "nov";
+          } else if (
+            (month === 12 && day >= 15) ||
+            (month === 1 && day <= 13)
+          ) {
+            zodiacSign = "dec";
+          } else if ((month === 1 && day >= 14) || (month === 2 && day <= 13)) {
+            zodiacSign = "jan";
+          } else if ((month === 2 && day >= 14) || (month === 3 && day <= 13)) {
+            zodiacSign = "feb";
+          } else if ((month === 3 && day >= 14) || (month === 4 && day <= 14)) {
+            zodiacSign = "mar";
+          }
+          return zodiacSign;
+        }
+        const sign = checkZodiac();
+        const interests = document.querySelector(
+          'input[name="interests"]:checked'
+        ).value;
+
+        const horoName = `${currentGodValue}-${interests}-${sign}-${birthDay}`;
+        const lineUUID = userId;
+
+        document.getElementById("finaloutput").innerHTML =
+          `lineUUID:${lineUUID}` + `${horoName}`;
+
+        const data = new FormData();
+        data.append("horo_name", horoName);
+        data.append("lineUUID", lineUUID);
+
+        fetch("https://your-api-endpoint", {
+          method: "POST",
+          body: data,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+        function sendDataToGoogleAppsScript(data) {
+          fetch(
+            "https://script.google.com/macros/s/AKfycbxbKUSsmGpfSwc4lhVz_ZNf0OCOlWS5QzuFupdiFWudSvuNp7pgalAn6jJdAUCeJXEi2Q/exec",
+            {
+              method: "POST",
+              body: JSON.stringify({
+                currentGodValue,
+                email,
+                birthDate,
+                birthDay,
+                interests,
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((responseData) => {
+              // Adjust logging based on your script's response
+              console.log(responseData);
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        }
+      }
     </script>
 
     <script>
@@ -791,122 +905,6 @@
         }
         slides[slideIndexBuddha - 1].style.display = "block";
         dots[slideIndexBuddha - 1].className += " active";
-      }
-    </script>
-
-    <script>
-      function callAPI() {
-        event.preventDefault();
-        let currentGodValue = document.getElementById("godSelect").value;
-
-        const email = document.getElementById("email").value;
-        const birthDate = document.getElementById("birthDate").value;
-        const birthDay = document.getElementById("birthDay").value;
-
-        function checkZodiac() {
-          const birthDate = document.getElementById("birthDate").value;
-          var date = new Date(birthDate);
-          var month = date.getMonth() + 1; // Adding 1 since getMonth() returns zero-based index
-          var day = date.getDate();
-          var zodiacSign = "";
-
-          if ((month === 4 && day >= 15) || (month === 5 && day <= 14)) {
-            zodiacSign = "apr";
-          } else if ((month === 5 && day >= 15) || (month === 6 && day <= 14)) {
-            zodiacSign = "may";
-          } else if ((month === 6 && day >= 15) || (month === 7 && day <= 15)) {
-            zodiacSign = "jun";
-          } else if ((month === 7 && day >= 16) || (month === 8 && day <= 16)) {
-            zodiacSign = "jul";
-          } else if ((month === 8 && day >= 17) || (month === 9 && day <= 16)) {
-            zodiacSign = "aug";
-          } else if (
-            (month === 9 && day >= 17) ||
-            (month === 10 && day <= 16)
-          ) {
-            zodiacSign = "sep";
-          } else if (
-            (month === 10 && day >= 17) ||
-            (month === 11 && day <= 15)
-          ) {
-            zodiacSign = "oct";
-          } else if (
-            (month === 11 && day >= 16) ||
-            (month === 12 && day <= 14)
-          ) {
-            zodiacSign = "nov";
-          } else if (
-            (month === 12 && day >= 15) ||
-            (month === 1 && day <= 13)
-          ) {
-            zodiacSign = "dec";
-          } else if ((month === 1 && day >= 14) || (month === 2 && day <= 13)) {
-            zodiacSign = "jan";
-          } else if ((month === 2 && day >= 14) || (month === 3 && day <= 13)) {
-            zodiacSign = "feb";
-          } else if ((month === 3 && day >= 14) || (month === 4 && day <= 14)) {
-            zodiacSign = "mar";
-          }
-          return zodiacSign;
-        }
-        const sign = checkZodiac();
-        const interests = document.querySelector(
-          'input[name="interests"]:checked'
-        ).value;
-
-        const horoName = `${currentGodValue}-${interests}-${sign}-${birthDay}`;
-        const lineUUID = userId;
-
-        document.getElementById("finaloutput").innerHTML =
-          `lineUUID:${lineUUID}` + `${horoName}`;
-
-        const data = new FormData();
-        data.append("horo_name", horoName);
-        data.append("lineUUID", lineUUID);
-
-        fetch("https://your-api-endpoint", {
-          method: "POST",
-          body: data,
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-
-        function sendDataToGoogleAppsScript(data) {
-          fetch(
-            "https://script.google.com/macros/s/AKfycbxbKUSsmGpfSwc4lhVz_ZNf0OCOlWS5QzuFupdiFWudSvuNp7pgalAn6jJdAUCeJXEi2Q/exec",
-            {
-              method: "POST",
-              body: JSON.stringify({
-                currentGodValue,
-                email,
-                birthDate,
-                birthDay,
-                interests,
-              }),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-              }
-              return response.json();
-            })
-            .then((responseData) => {
-              // Adjust logging based on your script's response
-              console.log(responseData);
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-            });
-        }
       }
     </script>
   </body>
