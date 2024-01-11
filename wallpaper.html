@@ -854,13 +854,11 @@
           'input[name="interests"]:checked'
         ).value;
 
-
         const horoName = `${currentGodValue}-${interests}-${sign}-${birthDay}`;
         const lineUUID = userId;
 
-        document.getElementById(
-          "finaloutput"
-        ).innerHTML = `lineUUID:${lineUUID}` + `${horoName}`;
+        document.getElementById("finaloutput").innerHTML =
+          `lineUUID:${lineUUID}` + `${horoName}`;
 
         const data = new FormData();
         data.append("horo_name", horoName);
@@ -877,6 +875,30 @@
           .catch((error) => {
             console.error(error);
           });
+
+        var dataToSend = {
+          currentGodValue: "someValue",
+          email: "example@example.com",
+          birthDate: "2022-01-11",
+          birthDay: "Monday",
+          interests: "Programming",
+        };
+        function sendDataToGoogleAppsScript(data) {
+          fetch(
+            "https://script.google.com/macros/s/AKfycbxbKUSsmGpfSwc4lhVz_ZNf0OCOlWS5QzuFupdiFWudSvuNp7pgalAn6jJdAUCeJXEi2Q/exec",
+            {
+              method: "POST",
+              body: JSON.stringify(data), // Assuming 'data' is an object
+            }
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
       }
     </script>
   </body>
