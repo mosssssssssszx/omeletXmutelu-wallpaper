@@ -723,9 +723,11 @@
             interests,
             userId,
             userDisplayName,
+            nowDate: new Date().toISOString(),
           },
         };
-        console.log(requestBody);
+        // dev https://api.sheety.co/7308b2b75c1bde0720a575e1b39f8144/omeletMutelu/sheet1
+        // prod https://api.sheety.co/aa3c2db535b0c6d3f66364fe832f3bf1/omeletLineMu/sheet1
         function sendDataToGoogleAppsScript() {
           fetch(
             "https://api.sheety.co/7308b2b75c1bde0720a575e1b39f8144/omeletMutelu/sheet1",
