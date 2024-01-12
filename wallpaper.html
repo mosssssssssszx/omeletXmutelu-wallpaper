@@ -575,7 +575,7 @@
           document.getElementById("loadingMessage").style.display = "block";
           // test liffId: 2002626947-bwZNRxPo
           // prod liffId: 2002675552-jGMd59Qg
-          await liff.init({ liffId: "2002626947-bwZNRxPo" });
+          await liff.init({ liffId: "2002675552-jGMd59Qg" });
           if (liff.isLoggedIn()) {
             const profile = await liff.getProfile();
             userId = profile.userId;
@@ -614,43 +614,80 @@
           var day = date.getDate();
           var zodiacSign = "";
 
-          if ((month === 4 && day >= 15) || (month === 5 && day <= 14)) {
-            zodiacSign = "apr";
-          } else if ((month === 5 && day >= 15) || (month === 6 && day <= 14)) {
-            zodiacSign = "may";
-          } else if ((month === 6 && day >= 15) || (month === 7 && day <= 15)) {
-            zodiacSign = "jun";
-          } else if ((month === 7 && day >= 16) || (month === 8 && day <= 16)) {
-            zodiacSign = "jul";
-          } else if ((month === 8 && day >= 17) || (month === 9 && day <= 16)) {
-            zodiacSign = "aug";
-          } else if (
-            (month === 9 && day >= 17) ||
-            (month === 10 && day <= 16)
-          ) {
-            zodiacSign = "sep";
-          } else if (
-            (month === 10 && day >= 17) ||
-            (month === 11 && day <= 15)
-          ) {
-            zodiacSign = "oct";
-          } else if (
-            (month === 11 && day >= 16) ||
-            (month === 12 && day <= 14)
-          ) {
-            zodiacSign = "nov";
-          } else if (
-            (month === 12 && day >= 15) ||
-            (month === 1 && day <= 13)
-          ) {
-            zodiacSign = "dec";
-          } else if ((month === 1 && day >= 14) || (month === 2 && day <= 13)) {
-            zodiacSign = "jan";
-          } else if ((month === 2 && day >= 14) || (month === 3 && day <= 13)) {
-            zodiacSign = "feb";
-          } else if ((month === 3 && day >= 14) || (month === 4 && day <= 14)) {
-            zodiacSign = "mar";
+          if (month === 4) {
+            if (day >= 15) {
+              zodiacSign = "apr";
+            } else {
+              zodiacSign = "mar";
+            }
+          } else if (month === 5) {
+            if (day <= 14) {
+              zodiacSign = "apr";
+            } else {
+              zodiacSign = "may";
+            }
+          } else if (month === 6) {
+            if (day <= 14) {
+              zodiacSign = "may";
+            } else {
+              zodiacSign = "jun";
+            }
+          } else if (month === 7) {
+            if (day <= 15) {
+              zodiacSign = "jun";
+            } else {
+              zodiacSign = "jul";
+            }
+          } else if (month === 8) {
+            if (day <= 16) {
+              zodiacSign = "jul";
+            } else {
+              zodiacSign = "aug";
+            }
+          } else if (month === 9) {
+            if (day <= 16) {
+              zodiacSign = "aug";
+            } else {
+              zodiacSign = "sep";
+            }
+          } else if (month === 10) {
+            if (day <= 16) {
+              zodiacSign = "sep";
+            } else {
+              zodiacSign = "oct";
+            }
+          } else if (month === 11) {
+            if (day <= 15) {
+              zodiacSign = "oct";
+            } else {
+              zodiacSign = "nov";
+            }
+          } else if (month === 12) {
+            if (day <= 14) {
+              zodiacSign = "nov";
+            } else {
+              zodiacSign = "dec";
+            }
+          } else if (month === 1) {
+            if (day <= 13) {
+              zodiacSign = "dec";
+            } else {
+              zodiacSign = "jan";
+            }
+          } else if (month === 2) {
+            if (day <= 13) {
+              zodiacSign = "jan";
+            } else {
+              zodiacSign = "feb";
+            }
+          } else if (month === 3) {
+            if (day <= 14) {
+              zodiacSign = "feb";
+            } else {
+              zodiacSign = "mar";
+            }
           }
+
           return zodiacSign;
         }
         const sign = checkZodiac();
@@ -689,36 +726,36 @@
           },
         };
         console.log(requestBody);
-        // function sendDataToGoogleAppsScript() {
-        //   fetch(
-        //     "https://api.sheety.co/7308b2b75c1bde0720a575e1b39f8144/omeletMutelu/sheet1",
-        //     {
-        //       method: "POST",
-        //       body: JSON.stringify(requestBody),
-        //       headers: {
-        //         "Content-Type": "application/json",
-        //       },
-        //     }
-        //   )
-        //     .then((response) => {
-        //       if (!response.ok) {
-        //         throw new Error(`HTTP error! Status: ${response.status}`);
-        //       }
-        //       return response.json();
-        //     })
-        //     .then((responseData) => {
-        //       console.log(responseData);
-        //       liff.closeWindow();
-        //     })
-        //     .catch((error) => {
-        //       console.error("Error:", error);
-        //     });
-        // }
+        function sendDataToGoogleAppsScript() {
+          fetch(
+            "https://api.sheety.co/7308b2b75c1bde0720a575e1b39f8144/omeletMutelu/sheet1",
+            {
+              method: "POST",
+              body: JSON.stringify(requestBody),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((responseData) => {
+              console.log(responseData);
+              document.getElementById("loadingMessage").style.display = "none";
+              //liff.closeWindow();
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        }
 
-        // sendDataToGoogleAppsScript();
+        sendDataToGoogleAppsScript();
       }
-      document.getElementById("loadingMessage").style.display = "none";
-      liff.closeWindow();
+
     </script>
 
     <script>
