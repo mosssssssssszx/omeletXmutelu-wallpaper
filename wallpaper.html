@@ -670,19 +670,22 @@
           .catch((error) => {
             console.error(error);
           });
+        const requestBody = {
+          sheet1: {
+            currentGodValue,
+            email,
+            birthDate,
+            birthDay,
+            interests,
+          },
+        };
 
-        function sendDataToGoogleAppsScript(data) {
+        function sendDataToGoogleAppsScript() {
           fetch(
-            "https://script.google.com/macros/s/AKfycbxbKUSsmGpfSwc4lhVz_ZNf0OCOlWS5QzuFupdiFWudSvuNp7pgalAn6jJdAUCeJXEi2Q/exec",
+            "https://api.sheety.co/7308b2b75c1bde0720a575e1b39f8144/omeletMutelu/sheet1",
             {
               method: "POST",
-              body: JSON.stringify({
-                currentGodValue,
-                email,
-                birthDate,
-                birthDay,
-                interests,
-              }),
+              body: JSON.stringify(requestBody),
               headers: {
                 "Content-Type": "application/json",
               },
@@ -695,13 +698,14 @@
               return response.json();
             })
             .then((responseData) => {
-              // Adjust logging based on your script's response
               console.log(responseData);
             })
             .catch((error) => {
               console.error("Error:", error);
             });
         }
+
+        sendDataToGoogleAppsScript();
       }
     </script>
 
