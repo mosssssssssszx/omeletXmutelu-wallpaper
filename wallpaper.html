@@ -656,9 +656,6 @@
         const horoName = `${currentGodValue}-${interests}-${sign}-${birthDay}`;
         const lineUUID = userId;
 
-        document.getElementById("finaloutput").innerHTML =
-          `lineUUID:${lineUUID}` + `${horoName}`;
-
         const data = new FormData();
         data.append("horo_name", horoName);
         data.append("lineUUID", lineUUID);
