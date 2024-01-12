@@ -660,7 +660,7 @@
         data.append("horo_name", horoName);
         data.append("lineUUID", lineUUID);
 
-        fetch("https://your-api-endpoint", {
+        fetch("https://labs.omelet.ooo/line/push", {
           method: "POST",
           body: data,
         })
