@@ -245,7 +245,7 @@
   <body>
     <div class="loadingMessage" id="loadingMessage">
       <img
-        src="https://cdn.discordapp.com/attachments/241924263798374400/1195385849379049492/Animation_-_1705057687736.gif?ex=65b3ccd3&is=65a157d3&hm=cf9eaa829ad2e49c2e667c8e923dbdbd8e55be127ef6671b9c2c759b9f1cf300&"
+        src="https://media.discordapp.net/attachments/1163361512002428970/1195324747500769380/Animation_-_1705057687736.gif?ex=65b393eb&is=65a11eeb&hm=446f8df51275d1166f6763ff57011cdba089e5b76e7c49a97e2d322c15972877&"
         alt="Loading..."
       />
     </div>
@@ -683,37 +683,37 @@
             birthDay,
             interests,
             userId,
-            userDisplayName
+            userDisplayName,
           },
         };
+        console.log(requestBody);
+        // function sendDataToGoogleAppsScript() {
+        //   fetch(
+        //     "https://api.sheety.co/7308b2b75c1bde0720a575e1b39f8144/omeletMutelu/sheet1",
+        //     {
+        //       method: "POST",
+        //       body: JSON.stringify(requestBody),
+        //       headers: {
+        //         "Content-Type": "application/json",
+        //       },
+        //     }
+        //   )
+        //     .then((response) => {
+        //       if (!response.ok) {
+        //         throw new Error(`HTTP error! Status: ${response.status}`);
+        //       }
+        //       return response.json();
+        //     })
+        //     .then((responseData) => {
+        //       console.log(responseData);
+        //       liff.closeWindow();
+        //     })
+        //     .catch((error) => {
+        //       console.error("Error:", error);
+        //     });
+        // }
 
-        function sendDataToGoogleAppsScript() {
-          fetch(
-            "https://api.sheety.co/7308b2b75c1bde0720a575e1b39f8144/omeletMutelu/sheet1",
-            {
-              method: "POST",
-              body: JSON.stringify(requestBody),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          )
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-              }
-              return response.json();
-            })
-            .then((responseData) => {
-              console.log(responseData);
-              liff.closeWindow();
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-            });
-        }
-
-        sendDataToGoogleAppsScript();
+        // sendDataToGoogleAppsScript();
       }
     </script>
 
