@@ -573,7 +573,9 @@
       async function initializeLiff() {
         try {
           document.getElementById("loadingMessage").style.display = "block";
-          await liff.init({ liffId: "2002675552-jGMd59Qg" });
+          // test liffId: 2002626947-bwZNRxPo
+          // prod liffId: 2002675552-jGMd59Qg
+          await liff.init({ liffId: "2002626947-bwZNRxPo" });
           if (liff.isLoggedIn()) {
             const profile = await liff.getProfile();
             userId = profile.userId;
@@ -581,14 +583,13 @@
             document
               .getElementsByClassName("tablinks")[0]
               .classList.add("active");
-            
+            document.getElementById("loadingMessage").style.display = "none";
           } else {
             liff.login();
           }
         } catch (error) {
           console.error("LIFF initialization failed", error);
         } finally {
-          document.getElementById("loadingMessage").style.display = "none";
           document.getElementById("hinduGodTab").click();
           currentSlidehindu(1);
           document
