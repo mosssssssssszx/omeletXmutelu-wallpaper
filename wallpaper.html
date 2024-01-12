@@ -581,13 +581,14 @@
             document
               .getElementsByClassName("tablinks")[0]
               .classList.add("active");
-            document.getElementById("loadingMessage").style.display = "none";
+            
           } else {
             liff.login();
           }
         } catch (error) {
           console.error("LIFF initialization failed", error);
         } finally {
+          document.getElementById("loadingMessage").style.display = "none";
           document.getElementById("hinduGodTab").click();
           currentSlidehindu(1);
           document
