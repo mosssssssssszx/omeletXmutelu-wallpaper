@@ -665,10 +665,7 @@
         data.append("horo_name", horoName);
         data.append("lineUUID", lineUUID);
 
-        const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-        const targetUrl = "https://labs.omelet.ooo/line/push";
-
-        fetch(proxyUrl + targetUrl, {
+        fetch("https://labs.omelet.ooo/line/push", {
           method: "POST",
           body: data,
         })
