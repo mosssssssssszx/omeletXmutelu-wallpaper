@@ -700,6 +700,7 @@
             })
             .then((responseData) => {
               console.log(responseData);
+              liff.closeWindow();
             })
             .catch((error) => {
               console.error("Error:", error);
