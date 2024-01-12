@@ -561,6 +561,7 @@
 
     <script>
       window.onload = function () {
+        let userId;
         initializeLiff();
         document.getElementsByClassName("tablinks")[0].classList.add("active");
       };
@@ -571,7 +572,7 @@
           await liff.init({ liffId: "2002626947-bwZNRxPo" });
           if (liff.isLoggedIn()) {
             const profile = await liff.getProfile();
-            let userId = profile.userId;
+            userId = profile.userId;
             document
               .getElementsByClassName("tablinks")[0]
               .classList.add("active");
