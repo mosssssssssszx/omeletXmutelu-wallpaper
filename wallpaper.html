@@ -245,7 +245,7 @@
   <body>
     <div class="loadingMessage" id="loadingMessage">
       <img
-        src="https://cdn.discordapp.com/attachments/241924263798374400/1193697052664791164/cc92e061a5da1fd2.gif?ex=65ada803&is=659b3303&hm=3f38b520d051c46f8c3c4527cfe914ff315f8525255894d22291c953357ae406&"
+        src="https://cdn.discordapp.com/attachments/241924263798374400/1195385849379049492/Animation_-_1705057687736.gif?ex=65b3ccd3&is=65a157d3&hm=cf9eaa829ad2e49c2e667c8e923dbdbd8e55be127ef6671b9c2c759b9f1cf300&"
         alt="Loading..."
       />
     </div>
@@ -581,13 +581,13 @@
             document
               .getElementsByClassName("tablinks")[0]
               .classList.add("active");
+            document.getElementById("loadingMessage").style.display = "none";
           } else {
             liff.login();
           }
         } catch (error) {
           console.error("LIFF initialization failed", error);
         } finally {
-          document.getElementById("loadingMessage").style.display = "none";
           document.getElementById("hinduGodTab").click();
           currentSlidehindu(1);
           document
@@ -597,6 +597,7 @@
       }
 
       function callAPI() {
+        document.getElementById("loadingMessage").style.display = "block";
         event.preventDefault();
         let currentGodValue = document.getElementById("godSelect").value;
 
